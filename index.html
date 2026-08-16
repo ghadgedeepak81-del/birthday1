@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A personalized cinematic birthday experience for Shivani.">
+  <title>Happy Birthday Shivuu ✨</title>
+  
+  <!-- Preconnect and Load Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Background Global Canvas for Particles (Petals, Stars, Dust) -->
+  <canvas id="global-particles"></canvas>
+  
+  <!-- Global Ambient Glow/Vignette Overlay -->
+  <div class="ambient-glow"></div>
+  
+  <!-- Custom Toast Notification Container for Easter Eggs -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- 1. LOADING SCREEN -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-content">
+      <p class="loader-text font-serif">Something special is loading...</p>
+      <div class="loader-bar-container">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Music Toggle & Mini Prompt -->
+  <div class="music-wrapper">
+    <div class="music-tooltip" id="music-tooltip">Play a little music? ♫</div>
+    <button class="music-toggle" id="music-btn" aria-label="Toggle Background Music">
+      <span class="music-icon">♫</span>
+      <div class="sound-wave" id="sound-wave">
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+        <span class="stroke"></span>
+      </div>
+    </button>
+  </div>
+  <audio id="bg-music" src="assets/music/birthday.mp3" loop preload="auto"></audio>
+
+  <!-- Story Scroll Progress Indicator -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- 2. HERO SECTION -->
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <h2 class="hero-salutation font-serif fade-in-hero">Hey Shivuu... 👀</h2>
+      <h1 class="hero-main-title font-serif fade-in-hero" style="animation-delay: 1s;">I made something for you.</h1>
+      <p class="hero-subtitle fade-in-hero" style="animation-delay: 2s;">And no... it's not just a birthday wish.</p>
+      <div class="hero-action fade-in-hero" style="animation-delay: 3s;">
+        <button id="btn-surprise" class="btn-glow" aria-label="Open Birthday Surprise">Open your surprise ✨</button>
+      </div>
+    </div>
+    
+    <div class="scroll-indicator" id="hero-scroll-indicator">
+      <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+      <span class="scroll-text">Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- MAIN STORY CONTENT (Locked and blurred until surprise button is clicked) -->
+  <main id="main-content" class="content-locked">
+    
+    <!-- 3. BIRTHDAY REVEAL SECTION -->
+    <section id="section-reveal" class="story-section reveal-section">
+      <div class="container container-narrow text-center">
+        <div class="date-badge-container">
+          <div class="date-badge font-serif" id="reveal-date">
+            <span class="date-num" id="click-date">18</span>
+            <span class="date-separator"></span>
+            <span class="date-month">AUG</span>
+          </div>
+        </div>
+        <p class="reveal-intro text-reveal-trigger">The day someone a little more special than usual was born.</p>
+        <h2 class="reveal-headline font-serif text-reveal-trigger">Happy Birthday, Shivani ❤️</h2>
+      </div>
+    </section>
+
+    <!-- 4. PERSONALIZED INTRO SECTION -->
+    <section id="section-intro" class="story-section intro-section">
+      <div class="container grid-two-col">
+        <div class="intro-image-wrapper reveal-slide-left">
+          <div class="cinematic-frame">
+            <img src="assets/images/shivani-01.jpg" alt="Shivani - Photo 1" class="cinematic-img" loading="lazy">
+          </div>
+        </div>
+        <div class="intro-text-wrapper">
+          <p class="intro-p font-serif text-reveal-trigger" data-delay="0.1">मी विचार केला होता...</p>
+          <p class="intro-p text-muted text-reveal-trigger" data-delay="0.4" style="line-height: 1.45;">फक्त "Happy Birthday" म्हणायचं. 😌</p>
+          <p class="intro-p font-serif text-reveal-trigger" data-delay="0.7">पण मग वाटलं...</p>
+          <p class="intro-p text-reveal-trigger" data-delay="1.0">तुझ्यासाठी एवढं simple wish करून कसं चालेल?</p>
+          <h3 class="intro-punch font-serif color-gold text-reveal-trigger" data-delay="1.3">तू थोडीशी special आहेस ना. 👀❤️</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FLIRTY CARD SECTION -->
+    <section id="section-flirty" class="story-section flirty-section">
+      <div class="container">
+        <h2 class="section-title text-center font-serif text-reveal-trigger">Since it's your birthday, I get one chance to be honest...</h2>
+        
+        <div class="cards-grid">
+          <!-- Card 1 -->
+          <div class="flirty-card hover-tilt">
+            <div class="card-inner">
+              <span class="card-number font-serif">01</span>
+              <h3 class="card-title font-serif">तुझी Smile</h3>
+              <p class="card-text">Honestly... थोडं unfair आहे. 👀</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="flirty-card hover-tilt">
+            <div class="card-inner">
+              <span class="card-number font-serif">02</span>
+              <h3 class="card-title font-serif">तुझी Vibe</h3>
+              <p class="card-text">Notice न करणं थोडं कठीण आहे.</p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="flirty-card hover-tilt">
+            <div class="card-inner">
+              <span class="card-number font-serif">03</span>
+              <h3 class="card-title font-serif">तुझी Presence</h3>
+              <p class="card-text">Normal moment सुद्धा थोडा special करून जाते.</p>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="flirty-card hover-tilt">
+            <div class="card-inner">
+              <span class="card-number font-serif">04</span>
+              <h3 class="card-title font-serif">आणि तू...</h3>
+              <p class="card-text">Well... आता थोडीशी difficult to ignore झाली आहेस. 😉</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PHOTO STORY SECTION -->
+    <section id="section-story" class="story-section photo-story-section">
+      <div class="container container-medium">
+        <div class="story-devanagari-header text-center">
+          <h2 class="story-devanagari-title text-reveal-trigger" data-delay="0.3">काही pictures... ज्या थोड्या जास्तच सुंदर वाटल्या. 👀</h2>
+          <p class="story-devanagari-subtitle text-reveal-trigger" data-delay="0.6">म्हणून website मध्ये त्यांच्यासाठी एक special place तर बनतंच होतं. <span class="glow-heart">❤️</span></p>
+        </div>
+        
+        <div class="story-timeline">
+          <!-- Story 1 -->
+          <div class="story-item align-right">
+            <div class="story-media reveal-scale">
+              <div class="cinematic-frame">
+                <img src="assets/images/shivani-01.jpg" alt="Shivani - Photo 1" class="cinematic-img" loading="lazy">
+              </div>
+            </div>
+            <div class="story-caption text-reveal-trigger">
+              <p class="caption-text font-serif">This smile...</p>
+              <p class="caption-subtext text-muted" style="margin-top: 0.5rem; font-size: 1.1rem; font-style: italic;">Yeah... I noticed. 👀</p>
+            </div>
+          </div>
+          
+          <!-- Story 2 -->
+          <div class="story-item align-left">
+            <div class="story-media reveal-scale">
+              <div class="cinematic-frame">
+                <img src="assets/images/shivani-02.jpg" alt="Shivani - Photo 2" class="cinematic-img" loading="lazy">
+              </div>
+            </div>
+            <div class="story-caption text-reveal-trigger">
+              <p class="caption-text font-serif">Itna casually accha kaise lag sakta hai koi?</p>
+            </div>
+          </div>
+          
+          <!-- Story 3 -->
+          <div class="story-item align-right">
+            <div class="story-media reveal-scale">
+              <div class="cinematic-frame">
+                <img src="assets/images/shivani-03.jpg" alt="Shivani - Photo 3" class="cinematic-img" loading="lazy">
+              </div>
+            </div>
+            <div class="story-caption text-reveal-trigger">
+              <p class="caption-text font-serif">काही pictures ना caption ची गरजच नसते.</p>
+            </div>
+          </div>
+          
+          <!-- Story 4 -->
+          <div class="story-item align-left">
+            <div class="story-media reveal-scale">
+              <div class="cinematic-frame">
+                <img src="assets/images/shivani-04.jpg" alt="Shivani - Photo 4" class="cinematic-img" loading="lazy">
+              </div>
+            </div>
+            <!-- Photo 4 has NO TEXT/CAPTION AT ALL -->
+          </div>
+
+          <!-- Story 5 -->
+          <div class="story-item align-right">
+            <div class="story-media reveal-scale">
+              <div class="cinematic-frame">
+                <img src="assets/images/shivani-05.jpg" alt="Shivani - Photo 5" class="cinematic-img" loading="lazy">
+              </div>
+            </div>
+            <div class="story-caption text-reveal-trigger">
+              <p class="caption-text font-serif">Okay... wasn't expecting this one.</p>
+            </div>
+          </div>
+
+          <!-- Story 6 -->
+          <div class="story-item align-left">
+            <div class="story-media reveal-scale">
+              <div class="cinematic-frame">
+                <img src="assets/images/shivani-06.jpg" alt="Shivani - Photo 6" class="cinematic-img" loading="lazy">
+              </div>
+            </div>
+            <div class="story-caption text-reveal-trigger">
+              <p class="caption-text font-serif">Tum photo ho ya distraction? 👀</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. EVENT MEMORY REFERENCE SECTION -->
+    <section id="section-memory" class="story-section memory-section">
+      <div class="container container-narrow text-center">
+        <div class="event-glow-bubble"></div>
+        <div class="memory-card reveal-fade">
+          <p class="memory-line text-reveal-trigger">Funny how one event can become a small memory...</p>
+          <p class="memory-line text-reveal-trigger">...and somehow, one person from that memory ends up getting a whole website made for her birthday.</p>
+          <p class="memory-line font-serif color-gold text-reveal-trigger">Didn't really plan that. 😌</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. A FEW WISHES FOR YOU SECTION -->
+    <section id="section-wishes" class="story-section wishes-section">
+      <div class="container">
+        <h2 class="section-title text-center font-serif text-reveal-trigger">A few wishes for you... ✨</h2>
+        <p class="section-desc text-center text-muted text-reveal-trigger" style="margin-top: -2.5rem; margin-bottom: 3.5rem;">Because your birthday deserves more than just one wish.</p>
+        
+        <div class="wishes-grid">
+          <!-- Wish Card 1 -->
+          <div class="wish-card hover-tilt text-reveal-trigger" data-delay="0.1">
+            <div class="wish-card-inner">
+              <span class="wish-number font-serif">01</span>
+              <h3 class="wish-title font-serif">Stay confident</h3>
+              <p class="wish-text">"Always believe in yourself."</p>
+              <div class="wish-reveal-content">
+                <p class="wish-reveal-line font-serif color-gold">"You have more in you than you think."</p>
+              </div>
+              <button class="wish-action-btn" aria-label="Reveal Wish">Reveal... ✨</button>
+            </div>
+          </div>
+          
+          <!-- Wish Card 2 -->
+          <div class="wish-card hover-tilt text-reveal-trigger" data-delay="0.2">
+            <div class="wish-card-inner">
+              <span class="wish-number font-serif">02</span>
+              <h3 class="wish-title font-serif">Be fearless</h3>
+              <p class="wish-text">"Don't be afraid to try new things."</p>
+              <div class="wish-reveal-content">
+                <p class="wish-reveal-line font-serif color-gold">"Sometimes, you just have to take the first step."</p>
+              </div>
+              <button class="wish-action-btn" aria-label="Reveal Wish">Reveal... ✨</button>
+            </div>
+          </div>
+          
+          <!-- Wish Card 3 -->
+          <div class="wish-card hover-tilt text-reveal-trigger" data-delay="0.3">
+            <div class="wish-card-inner">
+              <span class="wish-number font-serif">03</span>
+              <h3 class="wish-title font-serif">Follow your dreams</h3>
+              <p class="wish-text">"Whatever your dream is, I hope you never stop chasing it."</p>
+              <div class="wish-reveal-content">
+                <p class="wish-reveal-line font-serif color-gold">"Even when it feels difficult."</p>
+              </div>
+              <button class="wish-action-btn" aria-label="Reveal Wish">Reveal... ✨</button>
+            </div>
+          </div>
+          
+          <!-- Wish Card 4 -->
+          <div class="wish-card hover-tilt text-reveal-trigger" data-delay="0.4">
+            <div class="wish-card-inner">
+              <span class="wish-number font-serif">04</span>
+              <h3 class="wish-title font-serif">Own your moment</h3>
+              <p class="wish-text">"Maybe it's a runway. Maybe it's a stage. Maybe it's something completely different."</p>
+              <div class="wish-reveal-content">
+                <p class="wish-reveal-line font-serif color-gold">"Whatever it is, I hope you have the confidence to stand there and shine."</p>
+              </div>
+              <button class="wish-action-btn" aria-label="Reveal Wish">Reveal... ✨</button>
+            </div>
+          </div>
+          
+          <!-- Wish Card 5 -->
+          <div class="wish-card hover-tilt text-reveal-trigger" data-delay="0.5">
+            <div class="wish-card-inner">
+              <span class="wish-number font-serif">05</span>
+              <h3 class="wish-title font-serif">Keep becoming you</h3>
+              <p class="wish-text">"Keep learning. Keep growing. Keep becoming the person you want to be."</p>
+              <div class="wish-reveal-content">
+                <p class="wish-reveal-line font-serif color-gold">"And never be afraid to be yourself. ❤️"</p>
+              </div>
+              <button class="wish-action-btn" aria-label="Reveal Wish">Reveal... ✨</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. DREAMS & FASHION EDITORIAL SECTION -->
+    <section id="section-editorial" class="story-section editorial-section">
+      <div class="container container-medium">
+        <h2 class="section-title text-center font-serif text-reveal-trigger">For the dreams you haven't told everyone about... ✨</h2>
+        
+        <div class="editorial-layout grid-two-col">
+          <!-- Magazine Cover Composition (Left Column) -->
+          <div class="magazine-frame-wrapper reveal-slide-left">
+            <div class="magazine-frame" id="editorial-card">
+              <!-- Camera Flash Overlay -->
+              <div class="camera-flash" id="camera-flash"></div>
+              
+              <!-- Magazine Content Overlay -->
+              <div class="magazine-overlay">
+                <h3 class="magazine-title font-serif">SHIVANI</h3>
+                <p class="magazine-date">18 / 08 / 2026</p>
+                <p class="magazine-badge">NEW CHAPTER</p>
+                <div class="magazine-footer">
+                  <p class="magazine-footer-text">CONFIDENCE • DREAMS • POSSIBILITY</p>
+                </div>
+              </div>
+              <img src="assets/images/shivani-05.jpg" alt="Shivani - Magazine Cover" class="cinematic-img editorial-img" loading="lazy">
+            </div>
+            <p class="editorial-photo-caption font-serif text-center" style="margin-top: 1rem; color: var(--color-text-muted); font-size: 1.1rem; font-style: italic;">हा look थोडा जास्तच confidence देतोय. 😌</p>
+          </div>
+          
+          <!-- Editorial Text and Content (Right Column) -->
+          <div class="editorial-text-wrapper font-serif">
+            <p class="editorial-p text-reveal-trigger" data-delay="0.1">Maybe one day it's a runway...</p>
+            <p class="editorial-p text-reveal-trigger" data-delay="0.4">Maybe it's a stage...</p>
+            <p class="editorial-p text-reveal-trigger" data-delay="0.7">Maybe it's something completely different.</p>
+            
+            <div class="editorial-divider"></div>
+            
+            <h4 class="editorial-subtitle text-reveal-trigger" data-delay="1.0" style="font-weight: 300; font-size: 1.4rem; color: var(--color-blush);">Whatever you choose...</h4>
+            <p class="editorial-p text-reveal-trigger" data-delay="1.2">I hope you have the confidence to go after it.</p>
+            <p class="editorial-p text-reveal-trigger" data-delay="1.4">And when your moment comes...</p>
+            
+            <h2 class="editorial-headline-large color-gold text-reveal-trigger" data-delay="1.7" style="font-size: 3.5rem; font-weight: 400; letter-spacing: 0.1em; margin: 1rem 0;">Own it.</h2>
+            
+            <p class="editorial-p-flirty text-reveal-trigger" data-delay="2.0" style="font-size: 1.15rem; color: var(--color-text-muted); font-style: italic;">You might actually look pretty good doing it. 👀</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. THIS YEAR SECTION -->
+    <section id="section-this-year" class="story-section this-year-section">
+      <div class="container container-narrow text-center">
+        <h2 class="section-title font-serif text-reveal-trigger">This year, I hope...</h2>
+        
+        <div class="this-year-lines">
+          <p class="this-year-p text-reveal-trigger" data-delay="0.2">You laugh a little louder.</p>
+          <p class="this-year-p text-reveal-trigger" data-delay="0.5">You worry a little less.</p>
+          <p class="this-year-p text-reveal-trigger" data-delay="0.8">You try something you've always wanted to try.</p>
+          <p class="this-year-p text-reveal-trigger" data-delay="1.1">You meet people who bring out the best in you.</p>
+          <p class="this-year-p text-reveal-trigger" data-delay="1.4">You become even more confident in who you are.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. ONE LITTLE SECRET SECTION -->
+    <section id="section-secret" class="story-section secret-section">
+      <div class="container container-narrow text-center">
+        <div class="heart-trigger-wrapper reveal-fade">
+          <button id="secret-heart" class="heart-pulse-btn" aria-label="A secret heart">❤️</button>
+          <span class="heart-hint text-muted">Tap it...</span>
+        </div>
+        
+        <div class="secret-text-box">
+          <p class="secret-line secret-reveal-1">Okay...</p>
+          <p class="secret-line secret-reveal-2">One little secret.</p>
+          <p class="secret-line secret-reveal-3">I probably wouldn't have made all this...</p>
+          <p class="secret-line secret-reveal-4">...if I didn't think you were a little special.</p>
+          <p class="secret-line font-serif color-rose secret-reveal-5">Don't let that go to your head though. 😂</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. FINAL BIRTHDAY WISH SECTION -->
+    <section id="section-wish" class="wish-section">
+      <div class="wish-bg-overlay"></div>
+      <div class="wish-container container text-center">
+        <div class="wish-text-wrapper">
+          <h2 class="wish-h2 font-serif text-reveal-trigger" data-delay="0.1">For your birthday...</h2>
+          
+          <div class="wish-lines" style="display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem;">
+            <p class="wish-p text-reveal-trigger" data-delay="0.4">I hope you find more reasons to smile.</p>
+            <p class="wish-p text-reveal-trigger" data-delay="0.7">More courage to chase what you want.</p>
+            <p class="wish-p text-reveal-trigger" data-delay="1.0">More confidence in yourself.</p>
+            <p class="wish-p text-reveal-trigger" data-delay="1.3">More beautiful places to see.</p>
+            <p class="wish-p text-reveal-trigger" data-delay="1.6">More memories to make.</p>
+            <p class="wish-p text-reveal-trigger" data-delay="1.9">More people who genuinely make you happy.</p>
+          </div>
+          
+          <div class="wish-most-important text-reveal-trigger" data-delay="2.3" style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem;">
+            <h3 class="wish-important-title font-serif color-gold" style="font-size: 1.8rem; margin-bottom: 0.8rem; font-weight: 300;">And most importantly...</h3>
+            <p class="wish-p font-serif" style="font-size: 1.4rem; font-weight: 300;">"I hope you never stop becoming the person you want to be." ❤️</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. FINAL FLIRTY MESSAGE SECTION -->
+    <section id="section-final" class="story-section final-section">
+      <div class="container container-narrow text-center">
+        <button id="btn-final-msg" class="btn-glow-alt">One last thing 👀</button>
+        
+        <div id="final-reveal-box" class="final-reveal-box">
+          <p class="final-p">I could have just said Happy Birthday...</p>
+          <p class="final-p text-muted">...but where's the fun in being normal?</p>
+          <p class="final-p">So here's the real wish:</p>
+          
+          <h3 class="final-wish-heading font-serif">Keep smiling. Keep being you.</h3>
+          <p class="final-flirt-line color-gold font-serif">And maybe... give me a few more reasons to smile too. 😉</p>
+          
+          <div class="smile-trigger-wrapper">
+            <button id="btn-confetti" class="btn-clean">Okay, now you can smile 😌</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. FINAL PHOTO & CREDITS SECTION -->
+    <section id="section-credits" class="credits-section">
+      <div class="credits-img-overlay"></div>
+      <div class="credits-image-frame">
+        <img src="assets/images/shivani-06.jpg" alt="Shivani - Final Photo" class="cinematic-img credits-img" loading="lazy">
+      </div>
+      
+      <div class="credits-content container text-center">
+        <h2 class="credits-h2 font-serif text-reveal-trigger">Happy Birthday, Shivuu ❤️</h2>
+        <p class="credits-date font-serif text-reveal-trigger" data-delay="0.3">18 • 08 • 2026</p>
+        <div class="credits-divider text-reveal-trigger" data-delay="0.6"></div>
+        <p class="credits-author text-reveal-trigger" data-delay="0.8">"Made especially for you."</p>
+        <p class="credits-subtext text-reveal-trigger" data-delay="1.1">"Because a normal birthday wish felt a little too boring. 😉"</p>
+        
+        <button id="btn-back-to-top" class="btn-back-to-top text-reveal-trigger" data-delay="1.4" aria-label="Scroll to top">
+          <span class="arrow-up">↑</span> Back to Top
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Load GSAP & ScrollTrigger from Cloudflare CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Main Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
